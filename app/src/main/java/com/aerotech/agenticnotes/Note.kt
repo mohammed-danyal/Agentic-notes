@@ -8,5 +8,7 @@ import java.util.UUID
 data class Note(
     @PrimaryKey val id: UUID = UUID.randomUUID(),
     val title: String,
-    val content: String
+    val content: String,
+    val isBinned: Boolean = false,
+    val binnedTimestamp: Long? = null
 )
