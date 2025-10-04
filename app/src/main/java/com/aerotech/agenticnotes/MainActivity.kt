@@ -190,18 +190,15 @@ fun NoteEditScreen(navController: NavController, viewModel: NoteViewModel, noteI
         }
     }
 
-    DisposableEffect(key1 = noteId) {
+    DisposableEffect(key1 = Unit) {
         onDispose {
-            val title = titleText.trim()
-            val content = noteContent.trim()
-            if (title.isNotBlank() || content.isNotBlank()) {
-                val noteToSave = Note(
-                    id = noteId ?: UUID.randomUUID(),
-                    title = title,
-                    content = content
-                )
-                viewModel.upsertNote(noteToSave)
-            }
+            // This block now only runs ONCE when you leave the screen.
+            // It reads the latest state at that moment and tells the ViewModel to save.
+            viewModel.saveNoteOnExit(
+                noteId = noteId,
+                title = titleText,
+                content = noteContent
+            )
         }
     }
 

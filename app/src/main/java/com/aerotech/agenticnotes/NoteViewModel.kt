@@ -47,6 +47,23 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
             noteDao.upsertNote(note)
         }
     }
+    // In class NoteViewModel(...)
+
+    fun saveNoteOnExit(noteId: UUID?, title: String, content: String) {
+        val trimmedTitle = title.trim()
+        val trimmedContent = content.trim()
+
+        // Only save if there's something to save
+        if (trimmedTitle.isNotBlank() || trimmedContent.isNotBlank()) {
+            val noteToSave = Note(
+                id = noteId ?: UUID.randomUUID(), // Use existing ID or create a new one
+                title = trimmedTitle,
+                content = trimmedContent
+            )
+            // The existing upsertNote function is perfect for this
+            upsertNote(noteToSave)
+        }
+    }
 
     fun onSearchQueryChange(query: String) {
         _searchQuery.value = query
