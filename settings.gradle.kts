@@ -1,16 +1,14 @@
+// settings.gradle.kts
+
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
+        // Ensure these three are present and in this order
+        google()
         mavenCentral()
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -21,4 +19,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Agentic Notes"
 include(":app")
- 
